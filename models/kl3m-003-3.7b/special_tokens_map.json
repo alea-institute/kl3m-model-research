@@ -1,0 +1,13 @@
+{
+  "bos_token": "<|start|>",
+  "eos_token": "<|end|>",
+  "mask_token": "<|mask|>",
+  "pad_token": "<|pad|>",
+  "unk_token": {
+    "content": "<|unk|>",
+    "lstrip": false,
+    "normalized": false,
+    "rstrip": false,
+    "single_word": false
+  }
+}
