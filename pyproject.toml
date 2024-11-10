@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "kl3m-model-research"
+version = "0.1.0"
+description = ""
+authors = ["Mike Bommarito <mike@aleainstitute.ai>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+transformers = "^4.46.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
