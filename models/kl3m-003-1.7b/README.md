@@ -55,21 +55,21 @@ downstream users in the event of any future determination otherwise, we are lice
 ### Summary
 - **Architecture**: GPT-NeoX (i.e., ~GPT-3 architecture)
 - **Parameters**: 1.7 billion
-- **Context Window**: 4,096 tokens (true size, no sliding window)
+- **Context Window**: 8,192 tokens (true size, no sliding window)
 - **Language(s)**: Primarily English
 - **Tokenizer**: kl3m-001-32k BPE tokenizer (32,768 vocabulary size with unorthodox whitespace handling)
 - **Developed by**: Originally by [273 Ventures LLC](https://273ventures.com), donated to [ALEA Institute](https://aleainstitute.ai)
 - **License**: [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- **Hardware Requirements**: Runs real-time in fp32 on MacBook Air M1
+- **Hardware Requirements**: Runs real-time in bf16 on consumer NV/AMD GPUs
 
 ## Performance Metrics
 
 ### Perplexity Scores
-| Dataset        | Score  |
-|---------------|--------|
-| Wiki          | 19.58  |
-| CNN/Daily Mail| 11.20  |
-| Legal Domain  | 2.31   |
+| Dataset        | Score |
+|---------------|-------|
+| Wiki          | 18.25 |
+| CNN/Daily Mail| 9.61  |
+| Legal Domain  | 2.00  |
 
 The model demonstrates particularly strong per-parameter performance on legal domain content, outperforming many 
 larger models as of its training data.
@@ -96,7 +96,7 @@ import json
 from transformers import pipeline
 
 # Load the model and tokenizer
-p = pipeline('text-generation', 'alea-institute/kl3m-002-170m', device='cpu')
+p = pipeline('text-generation', 'alea-institute/kl3m-003-1.7b', device='cuda')
 
 # Example usage on CPU
 text = "Under this"
@@ -113,20 +113,20 @@ print(
 
 ```json
 [
-  "Under this proposed rule, the Federal agency must determine the effect on State, local, and",
-  "Under this proposed rule, we are proposing to amend the definition of \u201ccovered product\u201d in ",
-  "Under this proposed rule, the FAA is considering issuing this proposed rule after evaluating the information"
+  "Under this section, any person who is a party to the proceeding may be required to file ",
+  "Under this subsection, the term **eligible entity** means a State, a political subdivision of ",
+  "Under this section, the Secretary shall\u2014 (1)\nmake a grant to the National Academy of Sc"
 ]
 ```
 
 ## Contract Example
 ```python
-text = "Governing Law.\n"
+text = "Governing Law. "
 print(
     json.dumps(
         [
             r.get("generated_text")
-            for r in p(text, do_sample=True, temperature=0.3, num_return_sequences=3, max_new_tokens=32)
+            for r in p(text, do_sample=True, temperature=0.5, num_return_sequences=3, max_new_tokens=32)
         ], 
         indent=2
     )
@@ -135,9 +135,9 @@ print(
 
 ```json
 [
-  "Governing Law.\n The provisions of the Plan shall be construed and enforced in accordance with",
-  "Governing Law.\n The laws of the State of Delaware shall govern the validity, construction, and",
-  "Governing Law.\n The laws of the State of New York shall govern the validity, construction, enforcement"
+  "Governing Law. The validity, construction, enforcement and interpretation of this Agreement and of the War",
+  "Governing Law. This Agreement shall be governed by and construed in accordance with the laws of",
+  "Governing Law. This Agreement shall be governed by and construed and enforced in accordance"
 ]
 ```
 
@@ -148,7 +148,7 @@ The model implements several techniques during training:
 - Hybrid NTP and SFT cotraining
 - Dynamic, document-aware segmentation
 - Randomized padding
-- Traditional fixed- attention mechanisms
+- Traditional fixed-attention mechanisms
 
 ## License
 
