@@ -1,8 +1,32 @@
 {
-  "bos_token": "<|start|>",
-  "eos_token": "<|end|>",
-  "mask_token": "<|mask|>",
-  "pad_token": "<|pad|>",
+  "bos_token": {
+    "content": "<|start|>",
+    "lstrip": false,
+    "normalized": false,
+    "rstrip": false,
+    "single_word": false
+  },
+  "eos_token": {
+    "content": "<|end|>",
+    "lstrip": false,
+    "normalized": false,
+    "rstrip": false,
+    "single_word": false
+  },
+  "mask_token": {
+    "content": "<|mask|>",
+    "lstrip": false,
+    "normalized": false,
+    "rstrip": false,
+    "single_word": false
+  },
+  "pad_token": {
+    "content": "<|pad|>",
+    "lstrip": false,
+    "normalized": false,
+    "rstrip": false,
+    "single_word": false
+  },
   "unk_token": {
     "content": "<|unk|>",
     "lstrip": false,

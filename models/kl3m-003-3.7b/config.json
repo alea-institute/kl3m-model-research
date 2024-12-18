@@ -25,8 +25,8 @@
   "router_jitter_noise": 0.0,
   "sliding_window": null,
   "tie_word_embeddings": false,
-  "torch_dtype": "bfloat16",
-  "transformers_version": "4.40.0.dev0",
+  "torch_dtype": "float32",
+  "transformers_version": "4.46.1",
   "use_cache": true,
   "vocab_size": 32768
 }

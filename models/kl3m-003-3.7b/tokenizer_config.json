@@ -1,4 +1,6 @@
 {
+  "add_bos_token": false,
+  "add_eos_token": false,
   "add_prefix_space": false,
   "added_tokens_decoder": {
     "0": {
